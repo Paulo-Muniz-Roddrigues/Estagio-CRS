@@ -1,0 +1,16 @@
+span
+{
+    color: green;
+    font-weight: bolder;
+}
+.fonte
+{
+    font-weight: bolder;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.tabelaCentro
+{
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}

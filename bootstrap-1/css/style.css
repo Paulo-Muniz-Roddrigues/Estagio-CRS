@@ -1,0 +1,122 @@
+/* Aparencia */
+.fundo
+{
+  background-image: url("../images/ceuNoite.gif");
+}
+.tela /* Tela de conteudo */
+{
+  background-color: rgba(0, 255, 255, 0.5);
+  width: 900px;
+  height: auto;
+  border: 4px solid white;
+  padding: 10px;
+  margin: auto;
+}
+input
+{
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+}
+input:focus
+{
+  outline: 0;
+}
+a
+{
+  color: white;
+  text-decoration:none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: medium;
+}
+  /* Textos */
+.titulo
+{
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: xx-large;
+  text-align: center;
+  font-weight: bolder;
+}
+.subTitulo
+{
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: large;
+}
+.textoComum
+{
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: medium;
+}
+
+/* Inputs e selecoes */
+
+.caixaPesquisa
+{
+  border: 4px solid rgb(255, 255, 255, 0.5);
+  padding: 5px;
+  width: auto;
+  text-align: left;
+  padding-left: 50px;
+}
+.iconePesquisa 
+{
+  background: url("../images/PesquisaIcon.png") no-repeat left;
+  background-size: 40px;
+  background-position-x: 5px;
+}
+
+.caixaSelecao
+{
+  border: 4px solid rgb(255, 255, 255, 0.5);
+  padding: 5px;
+  width: auto;
+  text-align: center;
+}
+
+.centro
+{
+  text-align: center;
+}
+.inico
+{
+  text-align: left;
+}
+.fim
+{
+  text-align: end;
+}
+
+.caixaSelecao:hover, .caixaPesquisa:hover
+{
+  border: 4px solid rgb(255, 255, 255, 1);
+}
+
+.carouselSize
+{
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carouselImgSize
+{
+  width:700px;
+  height:440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Sessoes */
+#topo
+
+/* ../Para acessar apartir da pasta anterior*/
+
+.divElement{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  transform: translate(-50%, 0%);
+}

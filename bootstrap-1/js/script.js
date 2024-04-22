@@ -1,0 +1,4 @@
+function texto()
+{
+  alert("oi");
+}

@@ -1,0 +1,21 @@
+button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+button :hover {
+  border: 2px solid black;
+  border-radius: 30%;
+}
+
+.testarParaJS {
+  text-align: right;
+}
+
+#popup {
+  display: none;
+}
