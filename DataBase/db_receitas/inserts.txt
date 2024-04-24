@@ -1,0 +1,16 @@
+insert into pacientes(id, nome, cpf, endereco, email, telefone) values  ('0', 'Paulo', '203040304030', 'rua sei la', 'paulo@unochapeco.edu.br', '32320666');
+insert into pacientes(id, nome, cpf, endereco, email, telefone) values  ('1', 'Lucas', '264575347375', 'rua aquela ali', 'lucas@hotmail.com', '33333333');
+
+insert into diagnosticos(id, condicao_medica, data) values ('0', 'ligma', '22/12/22');
+insert into diagnosticos(id, condicao_medica, data) values ('1', 'gripizinha', '01/01/00');
+
+insert into receitas(id, id_pacientes, id_diagnosticos) values ('0', '0', '0');
+insert into receitas(id, id_pacientes, id_diagnosticos) values ('1', '1', '1');
+
+insert into medicamentos(id, nome) values ('0', 'bebe agua');
+insert into medicamentos(id, nome) values ('1', 'benadryl');
+insert into medicamentos(id, nome) values ('2', 'corre um pouco');
+
+insert into receitas_e_medicamentos(id_receitas, id_medicamentos, dosagem)  values ('0', '0', '50ml por dia');
+insert into receitas_e_medicamentos(id_receitas, id_medicamentos, dosagem)  values ('0', '2', '30min por dia');
+insert into receitas_e_medicamentos(id_receitas, id_medicamentos, dosagem)  values ('1', '1', '0,5ml por mes');

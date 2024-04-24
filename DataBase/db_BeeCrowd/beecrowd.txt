@@ -1,0 +1,236 @@
+CREATE TABLE customers (
+    id NUMERIC PRIMARY KEY,
+    name CHARACTER VARYING (255),
+    street CHARACTER VARYING (255),
+    city CHARACTER VARYING (255),
+    state CHAR (2),
+    credit_limit NUMERIC
+);
+
+INSERT INTO customers (id, name, street, city, state, credit_limit)
+VALUES
+    (1,	'Pedro Augusto da Rocha',	'Rua Pedro Carlos Hoffman',	'Porto Alegre',	'RS',	700.00),
+    (2,	'Antonio Carlos Mamel',	'Av. Pinheiros',	'Belo Horizonte',	'MG',	3500.50),
+    (3,	'Luiza Augusta Mhor,',	'Rua Salto Grande',	'Niteroi',	'RJ',	4000.00),
+    (4,	'Jane Ester',	'Av 7 de setembro',	'Erechim',	'RS',	800.00),
+    (5,	'Marcos Antônio dos Santos',	'Av Farrapos',	'Porto Alegre',	'RS',	4250.25);
+
+-- 2062 --
+select name from customers
+where city = 'Porto Alegre';
+
+-- 2063 --
+select name, street from customers
+where city = 'Porto Alegre';
+
+DROP TABLE customers;
+
+-- 2604 --
+CREATE TABLE products (
+    id NUMERIC PRIMARY KEY,
+    name CHARACTER VARYING (255),
+    amount NUMERIC,
+    price NUMERIC
+);
+
+INSERT INTO products (id, name, amount, price)
+VALUES
+    (1,	'Two-door wardrobe',	100,	80),
+    (2,	'Dining table',	1000,	560),
+    (3,	'Towel holder',	10000,	5.50),
+    (4,	'Computer desk',	350,	100),
+    (5,	'Chair',	3000,	210.64),
+    (6,	'Single bed',	750,	99);
+
+DROP TABLE products;
+
+select id, name from products
+where price < '10' or price > '100';
+
+-- 2065 --
+CREATE TABLE categories (
+    id numeric PRIMARY KEY,
+    name varchar
+);
+
+CREATE TABLE providers (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    street varchar(50),
+    city varchar(50),
+    state varchar(2)
+);
+
+CREATE TABLE products (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    amount numeric,
+    price numeric(7,2),
+    id_providers numeric REFERENCES providers (id),
+    id_categories numeric REFERENCES categories (id)
+);
+
+
+INSERT INTO categories (id , name)
+VALUES
+    (1,	'old stock'),
+    (2,	'new stock'),
+    (3,	'modern'),
+    (4,	'commercial'),
+    (5,	'recyclable'),
+    (6,	'executive'),
+    (7,	'superior'),
+    (8,	'wood'),
+    (9,	'super luxury'),
+    (10,	'vintage');
+
+INSERT INTO providers (id, name, street, city, state)
+VALUES
+    (1,	'Henrique'	,'Av Brasil',	'Rio de Janeiro',	'RJ'),
+    (2,	'Marcelo Augusto',	'Rua Imigrantes',	'Belo Horizonte',	'MG'),
+    (3,	'Caroline Silva', 'Av São Paulo',	'Salvador',	'BA'),
+    (4,	'Guilerme Staff',	'Rua Central',	'Porto Alegre',	'RS'),
+    (5,	'Isabela Moraes',	'Av Juiz Grande',	'Curitiba',	'PR'),
+    (6,	'Francisco Accerr',	'Av Paulista',	'São Paulo',	'SP');
+
+INSERT INTO products (id, name, amount, price, id_providers, id_categories)
+VALUES
+    (1,	'Two-door wardrobe',	100,	800,	6,	8),
+    (2,	'Dining table',	1000,	560,	1,	9),
+    (3,	'Towel holder',	10000,	25.50,	5,	1),
+    (4,	'Computer desk',	350,	320.50,	4,	6),
+    (5,	'Chair',	3000,	210.64,	3,	6),
+    (6,	'Single bed',	750,	460,	1,	2);
+
+DROP TABLE products, providers, categories;
+
+select
+    products.name,
+    providers.name
+from products
+inner join providers on products.id_providers = providers.id
+where products.id_categories = '6';
+
+-- 2606 --
+CREATE TABLE categories (
+    id numeric PRIMARY KEY,
+    name varchar
+);
+
+CREATE TABLE products (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    amount numeric,
+    price numeric(7,2),
+    id_categories numeric REFERENCES categories (id)
+);
+
+
+INSERT INTO categories (id, name)
+VALUES
+    (1,	'old stock'),
+    (2,	'new stock'),
+    (3,	'modern'),
+    (4,	'commercial'),
+    (5,	'recyclable'),
+    (6,	'executive'),
+    (7,	'superior'),
+    (8,	'wood'),
+    (9,	'super luxury'),
+    (10,'vintage');
+
+INSERT INTO products (id , name, amount, price, id_categories)
+VALUES
+    (1,	'Lampshade',	100,	800,	4),
+    (2,	'Table for painting',	1000,	560,	9),
+    (3,	'Notebook desk',	10000,	25.50,	9),
+    (4,	'Computer desk',	350,	320.50,	6),
+    (5,	'Chair',	'3000',	'210.64',	9),
+    (6,	'Home alarm',	750,	460,	4);
+
+DROP TABLE products, categories;
+
+select
+    products.id,
+    products.name
+from products
+inner join categories on products.id_categories = categories.id and categories.name like 'super%';
+
+-- 2607 --
+CREATE TABLE providers (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    street varchar(50),
+    city varchar(50),
+    state varchar(2)
+);
+
+INSERT INTO providers (id, name, street, city, state)
+VALUES
+    (1,	'Henrique',	'Av Brasil',	'Rio de Janeiro',	'RJ'),
+    (2,	'Marcelo Augusto',	'Rua Imigrantes',	'Belo Horizonte',	'MG'),
+    (3,	'Caroline Silva',	'Av São Paulo',	'Salvador',	'BA'),
+    (4,	'Guilerme Staff',	'Rua Central',	'Porto Alegre',	'RS'),
+    (5,	'Isabela Moraes',	'Av Juiz Grande',	'Curitiba',	'PR'),
+    (6,	'Francisco Accerr',	'Av Paulista',	'São Paulo',	'SP');
+
+DROP TABLE providers;
+
+select city
+from providers
+order by city asc;
+
+-- 2068 --
+CREATE TABLE products (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    amount numeric,
+    price numeric(7,2)
+);
+
+INSERT INTO products (id, name, amount, price)
+VALUES
+    (1,	'Two-doors wardrobe',	100,	800),
+    (2,	'Dining table',	1000,	560),
+    (3,	'Towel holder',	10000,	25.50),
+    (4,	'Computer desk',	350,	320.50),
+    (5,	'Chair',	3000,	210.64),
+    (6,	'Single bed',	750,	460);
+
+DROP TABLE products;
+
+select max(price) as maior, min(price) as menor from products;
+
+-- 2609 --
+CREATE TABLE categories (
+    id numeric PRIMARY KEY,
+    name varchar
+);
+
+CREATE TABLE products (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    amount numeric,
+    price numeric(7,2),
+    id_categories numeric REFERENCES categories (id)
+);
+
+INSERT INTO categories (id, name)
+VALUES
+    (1,	'wood'),
+    (2,	'luxury'),
+    (3,	'vintage'),
+    (4,	'modern'),
+    (5,	'super luxury');
+
+INSERT INTO products (id, name, amount, price, id_categories)
+VALUES
+    (1,	'Two-doors wardrobe', 100,	800,	1),
+    (2,	'Dining table',	1000,	560,	3),
+    (3,	'Towel holder',	10000,	25.50,	4),
+    (4,	'Computer desk',	350,	320.50,	2),
+    (5,	'Chair',	3000,	210.64,	4),
+    (6,	'Single bed',	750,	460,	1);
+
+DROP TABLE categories,products;
+

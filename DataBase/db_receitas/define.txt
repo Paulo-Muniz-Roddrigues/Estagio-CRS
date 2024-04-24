@@ -1,0 +1,57 @@
+create table pacientes(
+    id serial primary key unique,
+    nome varchar(100) not null,
+    cpf varchar(14) not null unique ,
+    endereco varchar(100) not null,
+    email varchar(100) not null unique ,
+    telefone varchar(17) not null unique
+);
+
+create table diagnosticos(
+    id serial primary key unique,
+    condicao_medica varchar(100),
+    data date
+);
+
+create table receitas(
+    id serial primary key unique,
+    id_pacientes int not null references  pacientes(id),
+    id_diagnosticos int not null references  diagnosticos(id)
+);
+
+create table medicamentos(
+    id serial primary key unique,
+    nome varchar(100)
+);
+
+create table receitas_e_medicamentos(
+    id serial primary key unique,
+    id_receitas int not null references receitas(id),
+    id_medicamentos int not null references medicamentos(id),
+    dosagem varchar(100)
+);
+
+create view todas_receitas as
+select
+    pacientes.nome,
+    pacientes.cpf,
+    pacientes.endereco,
+    pacientes.email,
+    pacientes.telefone,
+    diagnosticos.data,
+    medicamentos.nome as medicamento_nome,
+    receitas_e_medicamentos.dosagem
+from pacientes
+inner join receitas on (pacientes.id = receitas.id_pacientes)
+inner join diagnosticos on (receitas.id_diagnosticos = diagnosticos.id)
+inner join receitas_e_medicamentos on( receitas.id = receitas_e_medicamentos.id_receitas)
+inner join medicamentos on (receitas_e_medicamentos.id_medicamentos = medicamentos.id);
+
+create view receitas_por_nome as
+select * from todas_receitas where nome = 'Paulo';
+
+drop view todas_receitas, receitas_por_nome;
+drop table pacientes, diagnosticos, receitas, medicamentos, receitas_e_medicamentos;
+
+select * from receitas_por_nome;
+select * from todas_receitas;
