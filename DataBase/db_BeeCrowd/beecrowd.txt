@@ -234,3 +234,206 @@ VALUES
 
 DROP TABLE categories,products;
 
+select categories.name, sum(products.amount)
+from categories
+inner join products on products.id_categories =  categories.id
+group by categories.name
+order by categories.name asc;
+
+
+-- 2610 --
+CREATE TABLE products (
+    id NUMERIC PRIMARY KEY,
+    name VARCHAR,
+    amount NUMERIC,
+    price NUMERIC
+);
+
+INSERT INTO products (id, name, amount, price)
+VALUES
+    (1, 'Two-doors wardrobe', 100, 800),
+    (2, 'Dining table', 1000, 560),
+    (3, 'Towel holder', 10000, 25.50),
+    (4, 'Computer desk', 350, 320.50),
+    (5, 'Chair', 3000, 210.64),
+    (6, 'Single bed', 750, 460);
+
+DROP TABLE products;
+
+select round(avg(products.price), 2) from products;
+
+-- 2611 --
+CREATE TABLE genres (
+    id numeric PRIMARY KEY,
+    description varchar(50)
+);
+
+CREATE TABLE movies (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    id_genres numeric REFERENCES genres (id)
+);
+
+INSERT INTO genres (id, description)
+VALUES
+    (1,	'Animation'),
+    (2,	'Horror'),
+    (3,	'Action'),
+    (4,	'Drama'),
+    (5,	'Comedy');
+
+INSERT INTO movies (id, name, id_genres)
+VALUES
+    (1,	'Batman',	3),
+    (2,	'The Battle of the Dark River',	3),
+    (3,	'White Duck',	1),
+    (4,	'Breaking Barriers',	4),
+    (5,	'The Two Hours',	2);
+
+DROP TABLE movies, genres;
+
+select
+    movies.id,
+    movies.name
+from movies
+inner join genres on genres.id = movies.id_genres and genres.description like 'Action%';
+
+
+-- 2613 --
+CREATE TABLE prices (
+    id numeric PRIMARY KEY,
+    categorie varchar(50),
+    value numeric
+);
+
+
+CREATE TABLE movies (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    id_prices numeric REFERENCES prices (id)
+);
+
+INSERT INTO prices (id , categorie, value)
+VALUES
+    (1,	'Releases',	3.50),
+    (2,	'Bronze Seal',	2.00),
+    (3,	'Silver Seal',	2.50),
+    (4,	'Gold Seal',	3.00),
+    (5,	'Promotion',	1.50);
+
+INSERT INTO movies (id, name, id_prices)
+VALUES
+    (1,	'Batman',	3),
+    (2,	'The Battle of the Dark River',	3),
+    (3,	'White Duck',	5),
+    (4,	'Breaking Barriers',	4),
+    (5,	'The Two Hours',	2);
+
+DROP TABLE movies, prices;
+
+select
+    movies.id,
+    movies.name
+from movies
+inner join prices on prices.id = movies.id_prices and prices.value < '2';
+
+-- 2614 --
+CREATE TABLE customers (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    street varchar(50),
+    city varchar(50)
+);
+
+CREATE TABLE rentals (
+    id numeric PRIMARY KEY,
+    rentals_date date,
+    id_customers numeric REFERENCES customers (id)
+);
+
+INSERT INTO customers (id, name, street, city)
+VALUES
+    (1,	'Giovanna Goncalves Oliveira',	'Rua Mato Grosso',	'Canoas'),
+    (2,	'Kauã Azevedo Ribeiro',	'Travessa Ibiá',	'Uberlândia'),
+    (3,	'Rebeca Barbosa Santos',	'Rua Observatório Meteorológico',	'Salvador'),
+    (4,	'Sarah Carvalho Correia',	'Rua Antônio Carlos da Silva',	'Apucarana'),
+    (5,	'João Almeida Lima',	'Rua Rio Taiuva',	'Ponta Grossa'),
+    (6,	'Diogo Melo Dias',	'Rua Duzentos e Cinqüenta',	'Várzea Grande');
+
+INSERT INTO rentals (id, rentals_date, id_customers)
+VALUES
+    (1,	'09/10/2016',	3),
+    (2,	'02/09/2016',	1),
+    (3,	'02/08/2016',	4),
+    (4,	'02/09/2015',	2),
+    (5,	'02/03/2016',	6),
+    (6,	'04/04/2016',	4);
+
+DROP TABLE rentals, customers;
+
+select customers.name, rentals.rentals_date
+from customers
+inner join rentals on customers.id = rentals.id_customers and rentals.rentals_date between '2016-09-01' and '2016-09-30';
+
+-- 2615 --
+CREATE TABLE customers (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    street varchar(50),
+    city varchar(50)
+);
+
+
+INSERT INTO customers (id, name, street, city)
+VALUES
+    (1,	'Giovanna Goncalves Oliveira',	'Rua Mato Grosso',	'Canoas'),
+    (2, 'Kauã Azevedo Ribeiro',	'Travessa Ibiá',	'Uberlândia'),
+    (3,	'Rebeca Barbosa Santos',	'Rua Observatório Meteorológico',	'Salvador'),
+    (4,	'Sarah Carvalho Correia',	'Rua Antônio Carlos da Silva',	'Uberlândia'),
+    (5,	'João Almeida Lima',	'Rua Rio Taiuva',	'Ponta Grossa'),
+    (6,	'Diogo Melo Dias',	'Rua Duzentos e Cinqüenta',	'Várzea Grande');
+
+DROP TABLE customers;
+
+select city
+from customers
+
+-- 2616 --
+CREATE TABLE customers (
+    id numeric PRIMARY KEY,
+    name varchar(50),
+    street varchar(50),
+    city varchar(50)
+);
+
+
+CREATE TABLE locations (
+    id numeric PRIMARY KEY,
+    locations_date date,
+    id_customers numeric REFERENCES customers (id)
+);
+
+INSERT INTO customers (id, name, street, city)
+VALUES
+    (1,	'Giovanna Goncalves Oliveira',	'Rua Mato Grosso',	'Canoas'),
+    (2,	'Kauã Azevedo Ribeiro',	'Travessa Ibiá',	'Uberlândia'),
+    (3,	'Rebeca Barbosa Santos',	'Rua Observatório Meteorológico',	'Salvador'),
+    (4,	'Sarah Carvalho Correia',	'Rua Antônio Carlos da Silva',	'Apucarana'),
+    (5,	'João Almeida Lima',	'Rua Rio Taiuva',	'Ponta Grossa'),
+    (6,	'Diogo Melo Dias',	'Rua Duzentos e Cinqüenta',	'Várzea Grande');
+
+
+INSERT INTO locations (id , locations_date, id_customers)
+VALUES
+    (1,	'09/10/2016',	3),
+    (2,	'02/09/2016',	1),
+    (3,	'02/08/2016',	4),
+    (4,	'02/09/2015',	2),
+    (5,	'02/03/2016',	6),
+    (6,	'04/04/2016',	4);
+
+DROP TABLE locations, customers;
+
+select customers.id, customers.name
+from customers
+where id not in(select locations.id_customers from locations);
