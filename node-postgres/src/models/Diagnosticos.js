@@ -12,6 +12,7 @@ const Diagnostico = sequelize.define(
     },
     condicaoMedica: {
       field: 'condicao_medica',
+      name: 'condicaoMedica',
       type: DataTypes.STRING(100),
       allowNull: false,
     },

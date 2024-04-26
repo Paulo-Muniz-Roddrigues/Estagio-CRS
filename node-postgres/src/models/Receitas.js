@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config';
-import Paciente from './pacientes';
-import Diagnostico from './diagnosticos';
+import Paciente from './Pacientes';
+import Diagnostico from './Diagnosticos';
 
 const Receita = sequelize.define(
   'receitas',

@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config';
-import Receita from './pacientes';
-import Medicamento from './medicamentos';
+import Receita from './Receitas';
+import Medicamento from './Medicamentos';
 
-const ReceitaEMedicamnto = sequelize.define(
+const ReceitaEMedicamento = sequelize.define(
   'receitas_e_medicamentos',
   {
     id: {
@@ -21,7 +21,7 @@ const ReceitaEMedicamnto = sequelize.define(
   },
 );
 
-ReceitaEMedicamnto.belongsTo(Receita, {
+ReceitaEMedicamento.belongsTo(Receita, {
   as: 'receitasEmedicamentos',
   onDelete: 'no action',
   onUpdate: 'no action',
@@ -32,7 +32,7 @@ ReceitaEMedicamnto.belongsTo(Receita, {
   },
 });
 
-Receita.belongsTo(Medicamento, {
+ReceitaEMedicamento.belongsTo(Medicamento, {
   as: 'medicamentos',
   onDelete: 'no action',
   onUpdate: 'no action',
@@ -43,4 +43,4 @@ Receita.belongsTo(Medicamento, {
   },
 });
 
-export default Receita;
+export default ReceitaEMedicamento;
