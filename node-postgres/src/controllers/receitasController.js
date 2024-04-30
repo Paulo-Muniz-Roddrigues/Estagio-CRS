@@ -1,5 +1,6 @@
 import { where } from 'sequelize';
 import Receita from '../models/Receitas'
+import { sequelize } from '../config';
 
 const get = async (req, res) => {
   try {
@@ -77,7 +78,7 @@ const update = async (req, res) => {
 
     if(!response){
       return res.status(400).send({
-        message: 'Id não encntrado!',
+        message: 'Id não encontrado!',
         response: error.message,
       });
     }
@@ -136,9 +137,28 @@ const destroy = async (req, res) => {
   }
 };
 
+const getReceitaPorNome = async (req, res) => {
+  try {
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
+    const response = await sequelize.query(
+      `select * from todas_receitas where id_paciente = ${id};`
+    ).then((a) => a[0]);
+    return res.status(200).send({
+      message: 'Dados atualizados!',
+      response,
+    });
+    }catch(error){
+      return res.status(500).send({
+      message: 'Ops!',
+      response: error.message,
+    });
+  }
+};
+
 export default {
   get,
   create,
   update,
-  destroy
+  destroy,
+  getReceitaPorNome
 }

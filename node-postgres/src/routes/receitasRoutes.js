@@ -5,4 +5,5 @@ export default(app) => {
   app.post('/receitas', receitasController.create);
   app.patch('/receitas/:id', receitasController.update);
   app.delete('/receitas/:id', receitasController.destroy);
+  app.get('/receitasId/:id', receitasController.getReceitaPorNome);
 }
