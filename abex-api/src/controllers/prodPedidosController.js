@@ -1,11 +1,11 @@
-import BaseModel from '../models/BaseModel';
+import ProdPedido from '../models/ProdPedidos';
 
 const get = async (req, res) => {
   try {
     const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
 
     if (!id) {
-      const response = await BaseModel.findAll({
+      const response = await ProdPedido.findAll({
         order: [['id', 'asc']],
       });
       return res.status(200).send({
@@ -15,7 +15,7 @@ const get = async (req, res) => {
       });
     }
 
-    const response = await BaseModel.findOne({ where: { id } });
+    const response = await ProdPedido.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -42,7 +42,7 @@ const get = async (req, res) => {
 const create = async (dados, res) => {
   const { description, color, inactive } = dados;
 
-  const response = await BaseModel.create({
+  const response = await ProdPedido.create({
     description,
     color,
     inactive,
@@ -56,7 +56,7 @@ const create = async (dados, res) => {
 };
 
 const update = async (id, dados, res) => {
-  const response = await BaseModel.findOne({ where: { id } });
+  const response = await ProdPedido.findOne({ where: { id } });
 
   if (!response) {
     return res.status(200).send({
@@ -66,7 +66,7 @@ const update = async (id, dados, res) => {
     });
   }
 
-  Object.keys(dados).forEach((field) => response[field] = dados[field]);
+  Object.keys(dados).forEach((field) => { response[field] = dados[field]; });
 
   await response.save();
   return res.status(200).send({
@@ -96,7 +96,7 @@ const persist = async (req, res) => {
 
 const destroy = async (req, res) => {
   try {
-    const id = req.body.id ? req.body.id.toString().replace(/\D/g, '') : null;
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
     if (!id) {
       return res.status(200).send({
         type: 'error',
@@ -105,7 +105,7 @@ const destroy = async (req, res) => {
       });
     }
 
-    const response = await BaseModel.findOne({ where: { id } });
+    const response = await ProdPedido.findOne({ where: { id } });
 
     if (!response) {
       return res.status(200).send({
@@ -133,5 +133,7 @@ const destroy = async (req, res) => {
 export default {
   get,
   persist,
+  create,
+  update,
   destroy,
 };

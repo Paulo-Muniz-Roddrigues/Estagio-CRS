@@ -1,13 +1,19 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
 
-const BaseModel = sequelize.define(
-  'nome da tabela',
+const Categoria = sequelize.define(
+  'categoria',
   {
     id: {
+      field: 'id_categ',
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
+    },
+    nomeCategoria: {
+      field: 'nome_categoria',
+      type: DataTypes.STRING(100),
     },
   },
 
@@ -19,4 +25,4 @@ const BaseModel = sequelize.define(
   },
 );
 
-export default BaseModel;
+export default Categoria;
