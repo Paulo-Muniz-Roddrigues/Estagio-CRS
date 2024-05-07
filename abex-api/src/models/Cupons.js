@@ -9,7 +9,6 @@ const Cupom = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
     },
     cupom: {
       type: DataTypes.STRING(100),

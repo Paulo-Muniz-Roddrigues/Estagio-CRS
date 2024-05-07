@@ -10,7 +10,6 @@ const Produto = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allowNull: false,
     },
     nomeProduto: {
       type: DataTypes.STRING(50),

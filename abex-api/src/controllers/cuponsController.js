@@ -104,8 +104,11 @@ const destroy = async (req, res) => {
         data: [],
       });
     }
-
-    const response = await Cupom.findOne({ where: { id } });
+    const response = await Cupom.findOne({
+      where: {
+        id,
+      },
+    });
 
     if (!response) {
       return res.status(200).send({

@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/config';
+import Cargo from './Cargos';
 
 const Usuario = sequelize.define(
   'usuario',
@@ -36,5 +37,16 @@ const Usuario = sequelize.define(
     updatedAt: 'updated_at',
   },
 );
+
+Usuario.belongsTo(Cargo, {
+  as: 'cargo',
+  onDelete: 'no action',
+  onUpdate: 'no action',
+  foreignKey: {
+    field: 'id_cargo',
+    name: 'idCargo',
+  },
+  allowNull: false,
+});
 
 export default Usuario;

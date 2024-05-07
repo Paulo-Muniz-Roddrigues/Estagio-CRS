@@ -9,6 +9,7 @@ const Avaliacao = sequelize.define(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     nota: {
       type: DataTypes.INTEGER,

@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuarios';
+import Cargo from '../models/Cargos';
 
 export default async (req, res, next) => {
   try {
@@ -23,15 +24,22 @@ export default async (req, res, next) => {
         message: 'Token expirado, faça login!',
       });
     }
-
     const usuario = await Usuario.findOne({
       where: {
         id: decodedToken.userId,
       },
+      include: [{ // Join
+        model: Cargo,
+        as: 'cargo',
+        attributes: ['admin'],
+        where: {
+          admin: true,
+        },
+      }],
     });
     if (!usuario) {
       return res.status(401).send({
-        message: 'Conta incorreta!',
+        message: 'Sem permissão!',
       });
     }
     next();
