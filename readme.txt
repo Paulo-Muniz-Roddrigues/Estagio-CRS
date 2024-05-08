@@ -6,3 +6,7 @@ git remote add origin LINK SSH
 git add .
 git commit -m ""
 git push origin master
+
+usarios que usaram x cupom
+quantos produtos por pedido fez um usuario
+em quais pedidos o usuario x pediu o item y

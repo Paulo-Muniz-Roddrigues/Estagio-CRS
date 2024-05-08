@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { sequelize } from '../config/config';
 import Usuario from '../models/Usuarios';
 
 const get = async (req, res) => {
@@ -212,6 +213,59 @@ const login = async (req, res) => {
   }
 };
 
+const itensComprados = async (req, res) => {
+  try {
+    const id = req.params.id ? req.params.id.toString().replace(/\D/g, '') : null;
+    const idProduto = req.params.idProduto ? req.params.idProduto.toString().replace(/\D/g, '') : null;
+
+    if (!id) {
+      return res.status(200).send({
+        type: 'error',
+        message: 'Informe um id de cupom',
+        data: [],
+      });
+    }
+
+    const response = await sequelize.query(
+      `
+        select
+          usuario.nome_cliente,
+          produto.nome_produto,
+          pedido.data_pedido
+        from pedido
+          join prod_pedido pp on pedido.id_pedido = pp.id_pedido
+          join produto on pp.id_produto = produto.id_produto
+          join usuario on pedido.id_usuario = usuario.id_usuario
+        where
+          usuario.id_usuario = ${id}.
+        and
+          produto.id_produto = '${idProduto}';
+      `,
+    )
+      .then((a) => a[0]);
+
+    if (!response) {
+      return res.status(200).send({
+        type: 'error',
+        message: `Nenhum registro com id ${id}`,
+        data: [],
+      });
+    }
+
+    return res.status(200).send({
+      type: 'success',
+      message: 'Registro carregado com sucesso',
+      data: response,
+    });
+  } catch (error) {
+    return res.status(200).send({
+      type: 'error',
+      message: 'Ops! Ocorreu um erro',
+      error: error.message,
+    });
+  }
+};
+
 export default {
   get,
   persist,
@@ -220,4 +274,5 @@ export default {
   destroy,
   register,
   login,
+  itensComprados,
 };

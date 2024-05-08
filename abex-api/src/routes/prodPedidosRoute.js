@@ -7,4 +7,3 @@ export default (app) => {
   app.get('/prodPedidos', prodPedidosController.get);
   app.get('/prodPedidos/:id', prodPedidosController.get);
 };
-*

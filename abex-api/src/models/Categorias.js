@@ -18,7 +18,7 @@ const Categoria = sequelize.define(
 
   {
     freezeTableName: true,
-    timestamps: true,
+    timestamps: false,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
   },
