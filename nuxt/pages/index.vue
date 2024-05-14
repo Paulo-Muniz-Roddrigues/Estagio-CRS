@@ -12,7 +12,10 @@
       </v-icon>
     </v-btn>
     <v-btn class="ml-2" color="blue" @click="twitter()">
-      x
+      Twitter
+    </v-btn>
+    <v-btn class="ml-2" color="yellow" @click="tabela()">
+      Tabela
     </v-btn>
     <v-dialog v-model="dialog"  max-width="800">
         <v-card title="Use Google's location service?">
@@ -99,6 +102,9 @@ export default {
     },
     twitter(){
       this.$router.push({ path: '/twitter' });
+    },
+    tabela(){
+      this.$router.push({ path: '/tabela' });
     },
   }
 }

@@ -1,4 +1,7 @@
 <template>
+  <header>
+    <title>X. It's what's happening / X</title>
+  </header>
   <body style="background-color: white">
   <div class="container">
     
@@ -83,7 +86,7 @@
 </template>
 
 <script>
-
+  
 </script>
 
 <style>

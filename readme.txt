@@ -7,6 +7,22 @@ git add .
 git commit -m ""
 git push origin master
 
-usarios que usaram x cupom
-quantos produtos por pedido fez um usuario
-em quais pedidos o usuario x pediu o item y
+fazer true ser verde quando ativo e false vermelho
+fezer falores de ativo serem botoes que tracam de valor ao clicar
+
+{
+  "key": "ctrl+alt+m",
+  "command": "toggle",
+  "when": "editorTextFocus",
+  "args": {
+      "id": "minimap",
+      "value": [
+        {
+          "editor.minimap.enabled": true
+        },
+        {
+          "editor.minimap.enabled": false
+        }
+      ]
+    }
+}
