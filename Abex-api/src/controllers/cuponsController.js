@@ -41,12 +41,12 @@ const get = async (req, res) => {
 };
 
 const create = async (dados, res) => {
-  const { description, color, inactive } = dados;
+  const { cupom, desconto, ativo } = dados;
 
   const response = await Cupom.create({
-    description,
-    color,
-    inactive,
+    cupom,
+    desconto,
+    ativo,
   });
 
   return res.status(200).send({

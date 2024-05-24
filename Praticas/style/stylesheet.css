@@ -1,0 +1,20 @@
+body {
+  overflow: hidden;
+}
+
+.container { /* Para login */
+  display: flex;
+  height: 100vh;
+}
+.item { /* Dividir tela em dois */
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .item {
+    height: 50vh;
+  }
+}
